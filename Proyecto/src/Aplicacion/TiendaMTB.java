@@ -1,8 +1,12 @@
 package Aplicacion;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import Clases.*;
 import Utilerias.ent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 public class TiendaMTB {
 
     public static void main(String[] args) {
@@ -16,6 +20,10 @@ public class TiendaMTB {
         String [] llantas = {"2.1 in","2.4 in","2.35 in","2.6 in"};
         String [] cuadros = {"Aluminio","Fibra de carbono"};
         String [] recorrido = {"100mm a 120mm","130mm a 170mm","180mm a 200mm"};
+        
+        ArrayList<Bicicletas> inventario = new ArrayList<>();//Este Arraylist va a servir para que nos ayude 
+                                                             //a guardar las bicicletas que vayamos agregando
+        
         do{
             opc = ent.leerOpcion("Que desea realizar", "Opciones", opcs);
             
@@ -49,6 +57,7 @@ public class TiendaMTB {
                    }
                 }while(error);
                 Downhill dw = new Downhill(tipoLlanta,recorridoSus,marca,modelo,MaterialCuadro,precio);
+                inventario.add(dw);//Aqui agrega la bicleta al array
                 dw.mostrarDatos();
             } //Fin del if de de las bicis de Downhill
             
@@ -87,14 +96,26 @@ public class TiendaMTB {
                 } while(error);
                 
                 CrossCountry xc = new CrossCountry (peso,SusBloqueo,marca,modelo,MaterialCuadro,precio);
+                inventario.add(xc);
                 xc.mostrarDatos();
             }//Fin de bicis de XC
             
             else if(opc.equals(opcs[2])){
-                
-            }
-            
-            
+                FileOutputStream fos = null;
+                PrintWriter pw;
+                try {          
+                 fos = new FileOutputStream("Inventario.txt", true);
+                } catch (FileNotFoundException ex) {
+                }
+                 pw = new PrintWriter(fos);
+                 pw.write(cad);
+                 pw.close();
+                try {
+                fos.close();
+                } catch (IOException ex) {
+                }
+            }//Fin del mostrar inventario
+                   
         }while(!opc.equals(opcs[3]));
     }
     
