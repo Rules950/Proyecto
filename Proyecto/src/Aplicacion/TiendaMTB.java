@@ -27,7 +27,7 @@ public class TiendaMTB {
         do{
             opc = ent.leerOpcion("Que desea realizar", "Opciones", opcs);
             
-            if (opc.equals(opcs[3]))
+            if (opc==null || opc.equals(opcs[3]))
                 break;
             
             if (opc.equals(opcs[0])) {//Bicis de Downhill
@@ -101,20 +101,55 @@ public class TiendaMTB {
             }//Fin de bicis de XC
             
             else if(opc.equals(opcs[2])){
+                
                 FileOutputStream fos = null;
+                PrintWriter pw;
+                try {          
+                    fos = new FileOutputStream("Inventario.txt", true); 
+                } catch (FileNotFoundException ex) { }
+                
+                pw = new PrintWriter(fos);
+                for (int i = 0; i < inventario.size(); i++) {
+                    Bicicletas b = inventario.get(i);
+                    pw.println("Bici: " + b.getMarca() + " " + b.getModelo() + " $" + b.getPrecio());
+                }
+                pw.close();
+                          
+                java.io.FileReader fr = null;
+                java.io.BufferedReader br = null;
+                try {
+                    fr = new java.io.FileReader("Inventario.txt");
+                } catch (FileNotFoundException ex) { }
+                
+                br = new java.io.BufferedReader(fr);
+                String cadena, cad = "";
+                try {
+                    cadena = br.readLine();
+                    while (cadena != null) {
+                        cad = cad + cadena + "\n";
+                        cadena = br.readLine();
+                    }
+                    ent.imprimir(cad); 
+                    br.close();
+                    fr.close();
+                } catch (IOException ex) { }
+                        
+            }//Fin del mostrar inventario
+                /*FileOutputStream fos = null;
                 PrintWriter pw;
                 try {          
                  fos = new FileOutputStream("Inventario.txt", true);
                 } catch (FileNotFoundException ex) {
                 }
                  pw = new PrintWriter(fos);
+                int cad = 0;
                  pw.write(cad);
                  pw.close();
                 try {
                 fos.close();
                 } catch (IOException ex) {
                 }
-            }//Fin del mostrar inventario
+            }//Fin del mostrar inventario*/
                    
         }while(!opc.equals(opcs[3]));
     }
