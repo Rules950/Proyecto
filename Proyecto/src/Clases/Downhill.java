@@ -1,4 +1,5 @@
 package Clases;
+import Utilerias.ent;
 public class Downhill extends Bicicletas {
     String tipoLlanta, recorridoSus;
 
@@ -27,6 +28,13 @@ public class Downhill extends Bicicletas {
     public void setRecorridoSus(String recorridoSus) {
         this.recorridoSus = recorridoSus;
     }
-    
+    @Override 
+    public void mostrarDatos(){
+        String cad =  "Downhill\n" + "tipo de llanta: " + tipoLlanta + 
+                      "\nRecorrido de la Suspencion: " + recorridoSus;
+        super.mostrarDatos();
+        ent.imprimir(cad);
+        
+    }
     
 }

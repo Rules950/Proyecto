@@ -1,4 +1,5 @@
 package Clases;
+import Utilerias.ent;
 public class Bicicletas {
     String marca, modelo, MaterialCuadro;
     double precio;
@@ -43,7 +44,9 @@ public class Bicicletas {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public static void mostrarDatos(){
-        
+    public void mostrarDatos(){
+        String cad = "Marca: " + marca + "\nModelo: " + modelo + 
+               "\nMaterial del Cuadro: " + MaterialCuadro + "\nPrecio : $" + precio;
+        ent.imprimir(cad);
     }
 }

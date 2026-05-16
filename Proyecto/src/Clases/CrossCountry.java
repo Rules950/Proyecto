@@ -1,4 +1,5 @@
 package Clases;
+import Utilerias.ent;
 public class CrossCountry extends Bicicletas{
     int peso;
     String SusBloqueo;
@@ -28,5 +29,12 @@ public class CrossCountry extends Bicicletas{
     public void setSusBloqueo(String SusBloqueo) {
         this.SusBloqueo = SusBloqueo;
     }
-    
+    @Override 
+    public void mostrarDatos(){
+        String cad =  "CrossCountry\n" + "Peso: " + peso + 
+                      "\nSuspension de Bloqueo: " + SusBloqueo;
+        super.mostrarDatos();
+        ent.imprimir(cad);
+        
+    }
 }
