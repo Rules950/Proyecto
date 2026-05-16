@@ -56,27 +56,35 @@ public class TiendaMTB {
                 String marca = ent.leerOpcion("Elige la marca", "Marcas", marcas);
                 
                 if (marca.equals(marcas[0])) {//Trek
-                     modelo = ent.leerOpcion("Que modelo", "Modelo", new Object[] {"Supercaliper","Slash,Marlin"});
-                } else if (marca.equals(opcs[1])) {//specialized
+                     modelo = ent.leerOpcion("Que modelo", "Modelo", new Object[] {"Supercaliper","Marlin"});
+                } else if (marca.equals(marcas[1])) {//specialized
                      modelo = ent.leerOpcion("Que modelo", "Modelo", new Object[] {"Epic","Chisel"});
-                } else if (marca.equals(opcs[2])){//Santa Cruz
-                     modelo = ent.leerOpcion("Que modelo", "Modelo", new Object[] {"Blor","Highball"});
+                } else if (marca.equals(marcas[2])){//Santa Cruz
+                     modelo = ent.leerOpcion("Que modelo", "Modelo", new Object[] {"Blur","Highball"});
                 }
                 
                 String SusBloqueo = ent.leerOpcion("¿La bici tiene bloqeo de suspension?", "Suspensios", new Object [] {"Si","No"});
                 
                 MaterialCuadro = ent.leerOpcion(opc, marca, cuadros);
                 boolean error;
-                do{                   
-                   try{//esta excepcion es para que pongan un precio valido
+                do {     //Excepcion para que el precio se un numero valido              
+                   try {
                       error = false;
-                      precio = ent.leerDouble("Ingresa el precio de la Bicicleta" + marca + " " + modelo ); 
-                      peso = ent.leerEntero("Ingresa el peso de la Bici en KG");
-                   } catch(NumberFormatException err){
-                      ent.imprimir("Ingresa un numero valido");
+                      precio = ent.leerDouble("Ingresa el precio de la Bicicleta " + marca + " " + modelo); 
+                   } catch(NumberFormatException err) {
+                      ent.imprimir("Ingresa un número válido para el precio");
                       error = true;
                    }
-                }while(error);
+                } while(error);
+                do {   //Excepcion para que el peso este bien                
+                   try {
+                      error = false;
+                      peso = ent.leerEntero("Ingresa el peso de la Bici en KG");
+                   } catch(NumberFormatException err) {
+                      ent.imprimir("Ingresa un número entero válido para el peso");
+                      error = true;
+                   }
+                } while(error);
                 
                 CrossCountry xc = new CrossCountry (peso,SusBloqueo,marca,modelo,MaterialCuadro,precio);
                 xc.mostrarDatos();

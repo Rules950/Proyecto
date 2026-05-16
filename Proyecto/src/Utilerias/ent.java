@@ -1,9 +1,9 @@
 package Utilerias;
 import javax.swing.JOptionPane;
 public class ent {
+    
     public static int leerEntero(String mensaje){//metodo
         int valor;
-        
         valor=Integer.parseInt(JOptionPane.showInputDialog(mensaje));
         return valor;
     }//cierre metodo
